@@ -20,3 +20,15 @@ networknamespace notes:
 7.ip netns exec  netns1 ifconfig veth1 10.1.1.1/24 up  --启动netns 中的veth1的虚拟网卡
 
 8.ifconfig veth0 10.1.1.2/24 up   -- 将主机上的veth0的网卡启动
+
+ip link add veth2 type veth peer name veth3
+
+ip addr add 1.2.3.101/24 dev veth2
+    
+ip addr add 1.2.3.102/24 dev veth3
+
+ip link set veth2 up
+    
+ip addr add 1.2.3.102/24 dev veth3
+
+ip link set dev veth2  mastar br0  -- 将虚拟网卡link到网桥上
